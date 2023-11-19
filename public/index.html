@@ -11,7 +11,7 @@
         <main class="flex h-screen">
             <div class="m-auto block">
                 <div class="flex justify-end">
-                    <span class="text-3xl">Timezone</span>
+                    <span id="timezone" class="text-3xl">Timezone</span>
                 </div>
                 <div class="flex justify-center">
                     <span class="text-9xl"><span id="hour">12</span>:<span id="minute">00</span> <span id="am-pm">AM</span></span>
@@ -21,35 +21,57 @@
                 </div>
             </div>
         </main>
+        <!-- Importing date modules and extensions-->
         <script src="../node_modules/dayjs/dayjs.min.js"></script>
+        <script src="../node_modules/dayjs/plugin/timezone.js"></script>
+        <script src="../node_modules/dayjs/plugin/utc.js"></script>
+        <!-- Requiring module plugins -->
+        <script>dayjs.extend(window.dayjs_plugin_timezone)</script>
+        <script>dayjs.extend(window.dayjs_plugin_utc)</script>
+        <!-- Clock Functionality Script -->
         <script>
+            document.querySelector('#timezone').innerHTML = dayjs.tz.guess();
+            //Refresh clock so that it displays the current time
             setInterval(() => {
                 findHour();
-                document.querySelector('#minute').innerHTML = dayjs().minute();
+                // document.querySelector('#minute').innerHTML = dayjs().minute();
+                findMinute();
                 findDay();
-                // document.querySelector('#month').innerHTML = dayjs().month();
                 findMonth();
                 document.querySelector('#date').innerHTML = dayjs().date();
                 document.querySelector('#year').innerHTML = dayjs().year();
             }, 250);
+            //formatting the hour from 24 hour time to 12 hour time
             function findHour() {
                 if (dayjs().hour() === 12) {
+                    //in the case that it is noon
                     document.querySelector('#hour').innerHTML = "12";
                     document.querySelector('#am-pm').innerHTML = "PM";
                 } else if (dayjs().hour() === 0){
+                    //in the case that it is midnight
                     document.querySelector('#hour').innerHTML = "12";
                     document.querySelector('#am-pm').innerHTML = "AM";
                 } else if (dayjs().hour() > 12) {
+                    //in the case that it is afternoon
                     document.querySelector('#hour').innerHTML = dayjs().hour() - 12;
                     document.querySelector('#am-pm').innerHTML = "PM";
                 } else {
+                    //in the case that it is morning
                     document.querySelector('#hour').innerHTML = dayjs().hour();
                     document.querySelector('#am-pm').innerHTML = "AM";
                 }
             }
-            function amPm(){
-
+            //ensure minutes are displayed as 2 digits
+            function findMinute() {
+                let currentMinute;
+                if (dayjs().minute() < 10) {
+                    currentMinute = "0" + dayjs().minute();
+                } else {
+                    currentMinute = dayjs().minute();
+                }
+                document.querySelector('#minute').innerHTML = currentMinute;
             }
+            //change the month from a 0 indexed number to text
             function findMonth() {
                 let currentMonth;
                 switch (dayjs().month()) {
@@ -95,6 +117,7 @@
                 }
                 document.querySelector('#month').innerHTML = currentMonth;
             }
+            //change the day of the week from a 0 indexed number to text
             function findDay() {
                 let currentDay;
                 switch (dayjs().day()) {
