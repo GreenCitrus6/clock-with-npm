@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="An exercise to learn the basics of importing packages with NPM and using them in web projects.">
-        <link rel="stylesheet" href="../styles.css">
+        <link rel="stylesheet" href="./styles.css">
     </head>
     <body class="bg-stone-700 text-stone-300 font-mono opacity-90">
         <main class="flex h-screen">
@@ -23,13 +23,13 @@
         </main>
         <!-- Importing date modules and extensions-->
         <!-- dayjs -->
-        <script src="../node_modules/dayjs/dayjs.min.js"></script>
-        <script src="../node_modules/dayjs/plugin/timezone.js"></script>
-        <script src="../node_modules/dayjs/plugin/utc.js"></script>
+        <script src="./node_modules/dayjs/dayjs.min.js"></script>
+        <script src="./node_modules/dayjs/plugin/timezone.js"></script>
+        <script src="./node_modules/dayjs/plugin/utc.js"></script>
         <!-- Requiring module plugins -->
         <script>dayjs.extend(window.dayjs_plugin_timezone)</script>
         <script>dayjs.extend(window.dayjs_plugin_utc)</script>
         <!-- Clock Functionality Script -->
-        <script src="../dist/main.js"></script>
+        <script src="./dist/main.js"></script>
     </body>
 </html>
