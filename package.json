@@ -1,6 +1,13 @@
 {
+  "name": "npm-clock", 
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "webpack"
+  },
   "devDependencies": {
-    "tailwindcss": "^3.3.5"
+    "tailwindcss": "^3.3.5",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "dayjs": "^1.11.10",
